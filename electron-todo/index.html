@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>ToDo App</title>
+  <link rel="stylesheet" type="text/css" href="HomePage.css">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Paytone+One" />
+</head>
+
+<body>
+
+    <div class="task-wrap">
+        <h1 id="title">ToDo App</h1>
+        <input type="text" id="taskName" placeholder="Enter Task">
+        <button id="addButton" onclick="addTask()">Add Task</button>
+        <ul id="taskList"></ul>
+      </div>
+  <script>
+    function addTask() {
+      const taskNameInput = document.getElementById('taskName');
+      const taskName = taskNameInput.value.trim();
+
+      if (taskName !== '') {
+        const taskList = document.getElementById('taskList');
+        const taskItem = document.createElement('li');
+
+        // Create label for the task
+        const label = document.createElement('label');
+        label.textContent = taskName;
+
+        // Create checkbox
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+
+        // Set up flexbox for the task item
+        taskItem.style.display = 'flex';
+        taskItem.style.justifyContent = 'space-between';
+        taskItem.style.alignItems = 'center';
+
+        // Append checkbox, label, and hamburger icon to the task item
+        taskItem.appendChild(checkbox);
+        taskItem.appendChild(label);
+
+        const hamburgerIcon = document.createElement('div');
+        hamburgerIcon.id = 'nav-icon';
+        for (let i = 0; i < 3; i++) {
+          const span = document.createElement('span');
+          hamburgerIcon.appendChild(span);
+        }
+        taskItem.appendChild(hamburgerIcon);
+
+        // Add click event listener to the task item
+        taskItem.addEventListener('click', () => openSubtasksPage(taskName));
+
+        // Apply styles to the task item
+        taskItem.classList.add('task-item');
+
+        // Append task item to the task list
+        taskList.appendChild(taskItem);
+
+        // Clear the input field
+        taskNameInput.value = '';
+      }
+    }
+
+    function openSubtasksPage(taskName) {
+      // Navigate to the subtasks.html page or perform any action you need
+      window.location.href = 'subtasks.html';
+    }
+  </script>
+</body>
+
+</html>
